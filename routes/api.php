@@ -17,10 +17,16 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
+
 Route::post('register', 'UserController@register');
 Route::post('login', 'UserController@login');
 
-    Route::group(['middleware' => ['jwt.verify']], function() {
-        Route::get('user', 'UserController@getAuthenticatedUser');
-        Route::post('logout', 'UserController@logout');
-    });
+Route::group(['middleware' => ['jwt.verify']], function() {
+    Route::get('user', 'UserController@getAuthenticatedUser');
+    Route::post('logout', 'UserController@logout');
+    Route::post('todo', 'TodoController@store');
+    Route::get('todo', 'TodoController@index');
+    Route::delete('todo/{id}', 'TodoController@destroy');
+    Route::post('todo/{id}', 'TodoController@update');
+});
+
