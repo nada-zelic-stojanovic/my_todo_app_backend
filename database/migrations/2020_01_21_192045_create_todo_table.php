@@ -23,8 +23,6 @@ class CreateTodoTable extends Migration
             $table->boolean('important')->default(false);
             $table->timestamps();
         });
-
-        
     }
 
     /**
